@@ -1,3 +1,5 @@
+//START HERE, expand and find still need to be implemented
+
 package structures;
 
 import static java.lang.reflect.Array.newInstance;
@@ -57,14 +59,27 @@ public class AssociativeArray<K, V> {
    * Create a copy of this AssociativeArray.
    */
   public AssociativeArray<K, V> clone() {
-    return null; // STUB
+    AssociativeArray<K, V> ret = new AssociativeArray<K, V>();
+    for (int i = 0; i < this.size; i++) {
+      ret.pairs[i] = this.pairs[i];
+    }
+    return ret;
   } // clone()
 
   /**
    * Convert the array to a string.
    */
   public String toString() {
-    return "{}"; // STUB
+    if (this.size == 0) {
+      return "{}";
+    } // if the array is empty, without this the formatting would be incorrect ("{ }" not "{}")
+    String[] strArray = new String[this.size + 2];
+    strArray[0] = "{ ";
+    for (int i = 1; i < this.size; i++) {
+      strArray[i] = this.pairs[i].key.toString() + ": " + this.pairs[i].value.toString() + ", ";
+    }
+    strArray[this.size - 1] = "}";
+    return strArray.toString(); 
   } // toString()
 
   // +----------------+----------------------------------------------
@@ -76,7 +91,19 @@ public class AssociativeArray<K, V> {
    * get(key) will return value.
    */
   public void set(K key, V value) throws NullKeyException {
-    // STUB
+    if (key == null) {
+      throw new NullKeyException();
+    }
+    int i = 0;
+    while (!this.pairs[i].key.equals(key) || i == this.size) {
+      i++;
+    }
+    this.pairs[i].key = key;
+    this.pairs[i].value = value;
+
+    if(i == this.size) {
+      this.size++;
+    }
   } // set(K,V)
 
   /**
@@ -87,7 +114,15 @@ public class AssociativeArray<K, V> {
    *                              appear in the associative array.
    */
   public V get(K key) throws KeyNotFoundException {
-    return null; // STUB
+    if (!this.hasKey(key)) {
+      throw new KeyNotFoundException();
+    }
+    int i = 0;
+    while (!this.pairs[i].key.equals(key)) {
+      i++;
+    }
+    return this.pairs[i].value;
+
   } // get(K)
 
   /**
@@ -95,7 +130,11 @@ public class AssociativeArray<K, V> {
    * return false for the null key.
    */
   public boolean hasKey(K key) {
-    return false; // STUB
+    int i = 0;
+    while (!this.pairs[i].key.equals(key) || i == this.size) {
+      i++;
+    }
+    return i != this.size; // STUB
   } // hasKey(K)
 
   /**
@@ -104,7 +143,14 @@ public class AssociativeArray<K, V> {
    * in the associative array, does nothing.
    */
   public void remove(K key) {
-    // STUB
+    for(int i = 0; i < this.size; i++) {
+      if (this.pairs[i].key.equals(key)) {
+        this.pairs[i] = this.pairs[this.size - 1];
+        this.pairs[this.size - 1] = null;
+        this.size--;
+        return;
+      }
+    }
   } // remove(K)
 
   /**
