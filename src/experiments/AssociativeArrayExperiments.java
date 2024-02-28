@@ -69,12 +69,12 @@ public class AssociativeArrayExperiments {
       new ReportingAssociativeArray<BigInteger,BigInteger>("b2b", pen);
 
     // Set some values
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 20; i++) {
       b2b.set(BigInteger.valueOf(i), BigInteger.valueOf(i*i));
     } // for
 
     // Then get them
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 20; i++) {
       try { b2b.get(BigInteger.valueOf(i)); } catch (Exception e) { }
     } // for
 

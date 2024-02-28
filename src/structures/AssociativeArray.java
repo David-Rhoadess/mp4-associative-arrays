@@ -1,8 +1,7 @@
-//START HERE, expand and find still need to be implemented
-
 package structures;
 
 import static java.lang.reflect.Array.newInstance;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * A basic implementation of Associative Arrays with keys of type K
@@ -18,7 +17,7 @@ public class AssociativeArray<K, V> {
   // +-----------+
 
   /**
-   * The default capacity of the initial array.
+   * The default capacity of the initial array.linear-structures
    */
   static final int DEFAULT_CAPACITY = 16;
 
@@ -63,6 +62,7 @@ public class AssociativeArray<K, V> {
     for (int i = 0; i < this.size; i++) {
       ret.pairs[i] = this.pairs[i];
     }
+
     return ret;
   } // clone()
 
@@ -72,7 +72,7 @@ public class AssociativeArray<K, V> {
   public String toString() {
     if (this.size == 0) {
       return "{}";
-    } // if the array is empty, without this the formatting would be incorrect ("{ }" not "{}")
+    } // if the array is empty, without this the formattithis.size++;ng would be incorrect ("{ }" not "{}")
     String[] strArray = new String[this.size + 2];
     strArray[0] = "{ ";
     for (int i = 1; i < this.size; i++) {
@@ -90,20 +90,23 @@ public class AssociativeArray<K, V> {
    * Set the value associated with key to value. Future calls to
    * get(key) will return value.
    */
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public void set(K key, V value) throws NullKeyException {
     if (key == null) {
       throw new NullKeyException();
     }
+
     int i = 0;
-    while (!this.pairs[i].key.equals(key) || i == this.size) {
+    while (i != this.size && !this.pairs[i].key.equals(key)) {
       i++;
     }
-    this.pairs[i].key = key;
-    this.pairs[i].value = value;
-
-    if(i == this.size) {
+     if(i == this.size) {
       this.size++;
+      if (size > pairs.length) {
+        this.expand();
+      }
     }
+    this.pairs[i] = new KVPair(key, value);
   } // set(K,V)
 
   /**
@@ -131,7 +134,7 @@ public class AssociativeArray<K, V> {
    */
   public boolean hasKey(K key) {
     int i = 0;
-    while (!this.pairs[i].key.equals(key) || i == this.size) {
+    while (i != this.size && !this.pairs[i].key.equals(key)) {
       i++;
     }
     return i != this.size; // STUB
@@ -176,7 +179,15 @@ public class AssociativeArray<K, V> {
    * If no such entry is found, throws an exception.
    */
   public int find(K key) throws KeyNotFoundException {
-    throw new KeyNotFoundException();   // STUB
+    if (!this.hasKey(key)) {
+      throw new KeyNotFoundException(); 
+    }
+
+    int i = 0;
+    while (!this.pairs[i].key.equals(key)) {
+      i++;
+    }
+    return i;
   } // find(K)
 
 } // class AssociativeArray
