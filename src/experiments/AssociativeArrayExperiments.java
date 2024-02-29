@@ -4,12 +4,12 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 
 import structures.AssociativeArray;
-import structures.KeyNotFoundException;
+
 
 /**
  * Experiments with our AssociativeArray class.
  *
- * @author Your Name Here
+ * @author David Rhoades
  * @author Samuel A. Rebelsky
  */
 public class AssociativeArrayExperiments {

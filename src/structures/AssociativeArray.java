@@ -1,16 +1,14 @@
 package structures;
 
-import java.io.PrintWriter;
 
 import static java.lang.reflect.Array.newInstance;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * A basic implementation of Associative Arrays with keys of type K
  * and values of type V. Associative Arrays store key/value pairs
  * and permit you to look up values by key.
  *
- * @author Your Name Here
+ * @author David Rhoades
  * @author Samuel A. Rebelsky
  */
 public class AssociativeArray<K, V> {
@@ -62,7 +60,9 @@ public class AssociativeArray<K, V> {
   public AssociativeArray<K, V> clone() {
     AssociativeArray<K, V> ret = new AssociativeArray<K, V>();
     for (int i = 0; i < this.size; i++) {
-      ret.pairs[i] = this.pairs[i];
+      try {
+        ret.set(this.pairs[i].key, this.pairs[i].value);
+      } catch (NullKeyException e) {};
     }
 
 
@@ -139,7 +139,7 @@ public class AssociativeArray<K, V> {
     while (i != this.size && !this.pairs[i].key.equals(key)) {
       i++;
     }
-    return i != this.size; // STUB
+    return i != this.size;
   } // hasKey(K)
 
   /**

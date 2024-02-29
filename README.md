@@ -1,8 +1,10 @@
-Associative Arrays
-==================
+Author: David Rhoades, Sam Rebelsky (outline)
 
-Starter code for a project on associative arrays.
+This is an expandable assosiative array implementation that includes some tests. Written for CSC207 Spring 2024
 
-_Students should replace the contents of this file with appropriate
-contents, including author and date._
+I talked with Boston (an evening tutor) about string concatenation
+I talked with Simon (an evening tutor) about assertThrows
+I referenced the Java documentation for various methods.
+
+https://github.com/David-Rhoadess/mp4-associative-arrays
 
