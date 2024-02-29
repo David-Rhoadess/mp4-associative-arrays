@@ -1,5 +1,7 @@
 package structures;
 
+import java.io.PrintWriter;
+
 import static java.lang.reflect.Array.newInstance;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -63,6 +65,7 @@ public class AssociativeArray<K, V> {
       ret.pairs[i] = this.pairs[i];
     }
 
+
     return ret;
   } // clone()
 
@@ -73,13 +76,12 @@ public class AssociativeArray<K, V> {
     if (this.size == 0) {
       return "{}";
     } // if the array is empty, without this the formattithis.size++;ng would be incorrect ("{ }" not "{}")
-    String[] strArray = new String[this.size + 2];
-    strArray[0] = "{ ";
+    String ret = "{ " + this.pairs[0].key.toString() + ": " + this.pairs[0].value.toString();
     for (int i = 1; i < this.size; i++) {
-      strArray[i] = this.pairs[i].key.toString() + ": " + this.pairs[i].value.toString() + ", ";
+      ret += ", " + this.pairs[i].key.toString() + ": " + this.pairs[i].value.toString();
     }
-    strArray[this.size - 1] = "}";
-    return strArray.toString(); 
+
+    return ret + " }"; 
   } // toString()
 
   // +----------------+----------------------------------------------

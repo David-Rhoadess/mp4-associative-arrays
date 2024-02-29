@@ -24,6 +24,7 @@ public class AssociativeArrayExperiments {
   public static void main(String[] args) throws Exception{
     PrintWriter pen = new PrintWriter(System.out, true);
 
+
     divider(pen);
     expreimentStringsToStrings(pen);
     divider(pen);
@@ -58,6 +59,14 @@ public class AssociativeArrayExperiments {
     s2s.size();
     try { s2s.get("a"); } catch (Exception e) { }
     try { s2s.get("A"); } catch (Exception e) { }
+
+    s2s.set("m", "1");
+    AssociativeArray<String, String> newArr = s2s.clone();
+    s2s.toString();
+    newArr.toString();
+    pen.println(newArr.size());
+    pen.flush();
+
   } // expreimentStringsToStrings
 
   /**
